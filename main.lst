@@ -1,0 +1,1385 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.8.0 #5117 (Jun 26 2008) (UNIX)
+                              4 ; This file was generated Tue May 19 16:47:38 2009
+                              5 ;--------------------------------------------------------
+                              6 	.module main
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _czekaj
+                             14 	.globl _przerwanie1
+                             15 	.globl _KR
+                             16 	.globl _init_led
+                             17 	.globl _init_inout
+                             18 	.globl _itoa
+                             19 	.globl _printf
+                             20 	.globl _putchar
+                             21 	.globl _wczytaj
+                             22 	.globl _getchar
+                             23 	.globl _CY
+                             24 	.globl _AC
+                             25 	.globl _F0
+                             26 	.globl _RS1
+                             27 	.globl _RS0
+                             28 	.globl _OV
+                             29 	.globl _F1
+                             30 	.globl _P
+                             31 	.globl _PS
+                             32 	.globl _PT1
+                             33 	.globl _PX1
+                             34 	.globl _PT0
+                             35 	.globl _PX0
+                             36 	.globl _RD
+                             37 	.globl _WR
+                             38 	.globl _T1
+                             39 	.globl _T0
+                             40 	.globl _INT1
+                             41 	.globl _INT0
+                             42 	.globl _TXD
+                             43 	.globl _RXD
+                             44 	.globl _P3_7
+                             45 	.globl _P3_6
+                             46 	.globl _P3_5
+                             47 	.globl _P3_4
+                             48 	.globl _P3_3
+                             49 	.globl _P3_2
+                             50 	.globl _P3_1
+                             51 	.globl _P3_0
+                             52 	.globl _EA
+                             53 	.globl _ES
+                             54 	.globl _ET1
+                             55 	.globl _EX1
+                             56 	.globl _ET0
+                             57 	.globl _EX0
+                             58 	.globl _P2_7
+                             59 	.globl _P2_6
+                             60 	.globl _P2_5
+                             61 	.globl _P2_4
+                             62 	.globl _P2_3
+                             63 	.globl _P2_2
+                             64 	.globl _P2_1
+                             65 	.globl _P2_0
+                             66 	.globl _SM0
+                             67 	.globl _SM1
+                             68 	.globl _SM2
+                             69 	.globl _REN
+                             70 	.globl _TB8
+                             71 	.globl _RB8
+                             72 	.globl _TI
+                             73 	.globl _RI
+                             74 	.globl _P1_7
+                             75 	.globl _P1_6
+                             76 	.globl _P1_5
+                             77 	.globl _P1_4
+                             78 	.globl _P1_3
+                             79 	.globl _P1_2
+                             80 	.globl _P1_1
+                             81 	.globl _P1_0
+                             82 	.globl _TF1
+                             83 	.globl _TR1
+                             84 	.globl _TF0
+                             85 	.globl _TR0
+                             86 	.globl _IE1
+                             87 	.globl _IT1
+                             88 	.globl _IE0
+                             89 	.globl _IT0
+                             90 	.globl _P0_7
+                             91 	.globl _P0_6
+                             92 	.globl _P0_5
+                             93 	.globl _P0_4
+                             94 	.globl _P0_3
+                             95 	.globl _P0_2
+                             96 	.globl _P0_1
+                             97 	.globl _P0_0
+                             98 	.globl _B
+                             99 	.globl _ACC
+                            100 	.globl _PSW
+                            101 	.globl _IP
+                            102 	.globl _P3
+                            103 	.globl _IE
+                            104 	.globl _P2
+                            105 	.globl _SBUF
+                            106 	.globl _SCON
+                            107 	.globl _P1
+                            108 	.globl _TH1
+                            109 	.globl _TH0
+                            110 	.globl _TL1
+                            111 	.globl _TL0
+                            112 	.globl _TMOD
+                            113 	.globl _TCON
+                            114 	.globl _PCON
+                            115 	.globl _DPH
+                            116 	.globl _DPL
+                            117 	.globl _SP
+                            118 	.globl _P0
+                            119 	.globl _U10
+                            120 	.globl _U15
+                            121 	.globl _KR_PARM_4
+                            122 	.globl _KR_PARM_3
+                            123 	.globl _KR_PARM_2
+                            124 	.globl _t2
+                            125 	.globl _count
+                            126 	.globl _iter
+                            127 	.globl _done
+                            128 	.globl _i
+                            129 	.globl _cyfry
+                            130 ;--------------------------------------------------------
+                            131 ; special function registers
+                            132 ;--------------------------------------------------------
+                            133 	.area RSEG    (DATA)
+                    0080    134 _P0	=	0x0080
+                    0081    135 _SP	=	0x0081
+                    0082    136 _DPL	=	0x0082
+                    0083    137 _DPH	=	0x0083
+                    0087    138 _PCON	=	0x0087
+                    0088    139 _TCON	=	0x0088
+                    0089    140 _TMOD	=	0x0089
+                    008A    141 _TL0	=	0x008a
+                    008B    142 _TL1	=	0x008b
+                    008C    143 _TH0	=	0x008c
+                    008D    144 _TH1	=	0x008d
+                    0090    145 _P1	=	0x0090
+                    0098    146 _SCON	=	0x0098
+                    0099    147 _SBUF	=	0x0099
+                    00A0    148 _P2	=	0x00a0
+                    00A8    149 _IE	=	0x00a8
+                    00B0    150 _P3	=	0x00b0
+                    00B8    151 _IP	=	0x00b8
+                    00D0    152 _PSW	=	0x00d0
+                    00E0    153 _ACC	=	0x00e0
+                    00F0    154 _B	=	0x00f0
+                            155 ;--------------------------------------------------------
+                            156 ; special function bits
+                            157 ;--------------------------------------------------------
+                            158 	.area RSEG    (DATA)
+                    0080    159 _P0_0	=	0x0080
+                    0081    160 _P0_1	=	0x0081
+                    0082    161 _P0_2	=	0x0082
+                    0083    162 _P0_3	=	0x0083
+                    0084    163 _P0_4	=	0x0084
+                    0085    164 _P0_5	=	0x0085
+                    0086    165 _P0_6	=	0x0086
+                    0087    166 _P0_7	=	0x0087
+                    0088    167 _IT0	=	0x0088
+                    0089    168 _IE0	=	0x0089
+                    008A    169 _IT1	=	0x008a
+                    008B    170 _IE1	=	0x008b
+                    008C    171 _TR0	=	0x008c
+                    008D    172 _TF0	=	0x008d
+                    008E    173 _TR1	=	0x008e
+                    008F    174 _TF1	=	0x008f
+                    0090    175 _P1_0	=	0x0090
+                    0091    176 _P1_1	=	0x0091
+                    0092    177 _P1_2	=	0x0092
+                    0093    178 _P1_3	=	0x0093
+                    0094    179 _P1_4	=	0x0094
+                    0095    180 _P1_5	=	0x0095
+                    0096    181 _P1_6	=	0x0096
+                    0097    182 _P1_7	=	0x0097
+                    0098    183 _RI	=	0x0098
+                    0099    184 _TI	=	0x0099
+                    009A    185 _RB8	=	0x009a
+                    009B    186 _TB8	=	0x009b
+                    009C    187 _REN	=	0x009c
+                    009D    188 _SM2	=	0x009d
+                    009E    189 _SM1	=	0x009e
+                    009F    190 _SM0	=	0x009f
+                    00A0    191 _P2_0	=	0x00a0
+                    00A1    192 _P2_1	=	0x00a1
+                    00A2    193 _P2_2	=	0x00a2
+                    00A3    194 _P2_3	=	0x00a3
+                    00A4    195 _P2_4	=	0x00a4
+                    00A5    196 _P2_5	=	0x00a5
+                    00A6    197 _P2_6	=	0x00a6
+                    00A7    198 _P2_7	=	0x00a7
+                    00A8    199 _EX0	=	0x00a8
+                    00A9    200 _ET0	=	0x00a9
+                    00AA    201 _EX1	=	0x00aa
+                    00AB    202 _ET1	=	0x00ab
+                    00AC    203 _ES	=	0x00ac
+                    00AF    204 _EA	=	0x00af
+                    00B0    205 _P3_0	=	0x00b0
+                    00B1    206 _P3_1	=	0x00b1
+                    00B2    207 _P3_2	=	0x00b2
+                    00B3    208 _P3_3	=	0x00b3
+                    00B4    209 _P3_4	=	0x00b4
+                    00B5    210 _P3_5	=	0x00b5
+                    00B6    211 _P3_6	=	0x00b6
+                    00B7    212 _P3_7	=	0x00b7
+                    00B0    213 _RXD	=	0x00b0
+                    00B1    214 _TXD	=	0x00b1
+                    00B2    215 _INT0	=	0x00b2
+                    00B3    216 _INT1	=	0x00b3
+                    00B4    217 _T0	=	0x00b4
+                    00B5    218 _T1	=	0x00b5
+                    00B6    219 _WR	=	0x00b6
+                    00B7    220 _RD	=	0x00b7
+                    00B8    221 _PX0	=	0x00b8
+                    00B9    222 _PT0	=	0x00b9
+                    00BA    223 _PX1	=	0x00ba
+                    00BB    224 _PT1	=	0x00bb
+                    00BC    225 _PS	=	0x00bc
+                    00D0    226 _P	=	0x00d0
+                    00D1    227 _F1	=	0x00d1
+                    00D2    228 _OV	=	0x00d2
+                    00D3    229 _RS0	=	0x00d3
+                    00D4    230 _RS1	=	0x00d4
+                    00D5    231 _F0	=	0x00d5
+                    00D6    232 _AC	=	0x00d6
+                    00D7    233 _CY	=	0x00d7
+                            234 ;--------------------------------------------------------
+                            235 ; overlayable register banks
+                            236 ;--------------------------------------------------------
+                            237 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     238 	.ds 8
+                            239 ;--------------------------------------------------------
+                            240 ; overlayable bit register bank
+                            241 ;--------------------------------------------------------
+                            242 	.area BIT_BANK	(REL,OVR,DATA)
+   0000                     243 bits:
+   0000                     244 	.ds 1
+                    8000    245 	b0 = bits[0]
+                    8100    246 	b1 = bits[1]
+                    8200    247 	b2 = bits[2]
+                    8300    248 	b3 = bits[3]
+                    8400    249 	b4 = bits[4]
+                    8500    250 	b5 = bits[5]
+                    8600    251 	b6 = bits[6]
+                    8700    252 	b7 = bits[7]
+                            253 ;--------------------------------------------------------
+                            254 ; internal ram data
+                            255 ;--------------------------------------------------------
+                            256 	.area DSEG    (DATA)
+   0000                     257 _cyfry::
+   0000                     258 	.ds 10
+   000A                     259 _i::
+   000A                     260 	.ds 2
+   000C                     261 _done::
+   000C                     262 	.ds 2
+   000E                     263 _iter::
+   000E                     264 	.ds 2
+   0010                     265 _count::
+   0010                     266 	.ds 2
+   0012                     267 _t2::
+   0012                     268 	.ds 2
+   0014                     269 _wczytaj_temp_1_1:
+   0014                     270 	.ds 3
+   0017                     271 _itoa_n_1_1:
+   0017                     272 	.ds 2
+   0019                     273 _itoa_buff_1_1:
+   0019                     274 	.ds 3
+   001C                     275 _itoa_sloc0_1_0:
+   001C                     276 	.ds 3
+   001F                     277 _KR_PARM_2:
+   001F                     278 	.ds 2
+   0021                     279 _KR_PARM_3:
+   0021                     280 	.ds 3
+   0024                     281 _KR_PARM_4:
+   0024                     282 	.ds 2
+   0026                     283 _KR_wzorzec_1_1:
+   0026                     284 	.ds 3
+   0029                     285 _KR_d_1_1:
+   0029                     286 	.ds 2
+   002B                     287 _KR_hx_1_1:
+   002B                     288 	.ds 2
+   002D                     289 _KR_hy_1_1:
+   002D                     290 	.ds 2
+   002F                     291 _KR_j_1_1:
+   002F                     292 	.ds 2
+   0031                     293 _KR_count_1_1:
+   0031                     294 	.ds 2
+                            295 ;--------------------------------------------------------
+                            296 ; overlayable items in internal ram 
+                            297 ;--------------------------------------------------------
+                            298 	.area	OSEG    (OVR,DATA)
+                            299 	.area	OSEG    (OVR,DATA)
+                            300 	.area	OSEG    (OVR,DATA)
+                            301 ;--------------------------------------------------------
+                            302 ; Stack segment in internal ram 
+                            303 ;--------------------------------------------------------
+                            304 	.area	SSEG	(DATA)
+   0000                     305 __start__stack:
+   0000                     306 	.ds	1
+                            307 
+                            308 ;--------------------------------------------------------
+                            309 ; indirectly addressable internal ram data
+                            310 ;--------------------------------------------------------
+                            311 	.area ISEG    (DATA)
+                            312 ;--------------------------------------------------------
+                            313 ; absolute internal ram data
+                            314 ;--------------------------------------------------------
+                            315 	.area IABS    (ABS,DATA)
+                            316 	.area IABS    (ABS,DATA)
+                            317 ;--------------------------------------------------------
+                            318 ; bit data
+                            319 ;--------------------------------------------------------
+                            320 	.area BSEG    (BIT)
+                            321 ;--------------------------------------------------------
+                            322 ; paged external ram data
+                            323 ;--------------------------------------------------------
+                            324 	.area PSEG    (PAG,XDATA)
+                            325 ;--------------------------------------------------------
+                            326 ; external ram data
+                            327 ;--------------------------------------------------------
+                            328 	.area XSEG    (XDATA)
+                    8000    329 _U15	=	0x8000
+                    FFFF    330 _U10	=	0xffff
+                            331 ;--------------------------------------------------------
+                            332 ; absolute external ram data
+                            333 ;--------------------------------------------------------
+                            334 	.area XABS    (ABS,XDATA)
+                            335 ;--------------------------------------------------------
+                            336 ; external initialized ram data
+                            337 ;--------------------------------------------------------
+                            338 	.area XISEG   (XDATA)
+                            339 	.area HOME    (CODE)
+                            340 	.area GSINIT0 (CODE)
+                            341 	.area GSINIT1 (CODE)
+                            342 	.area GSINIT2 (CODE)
+                            343 	.area GSINIT3 (CODE)
+                            344 	.area GSINIT4 (CODE)
+                            345 	.area GSINIT5 (CODE)
+                            346 	.area GSINIT  (CODE)
+                            347 	.area GSFINAL (CODE)
+                            348 	.area CSEG    (CODE)
+                            349 ;--------------------------------------------------------
+                            350 ; interrupt vector 
+                            351 ;--------------------------------------------------------
+                            352 	.area HOME    (CODE)
+   0000                     353 __interrupt_vect:
+   0000 02s00r00            354 	ljmp	__sdcc_gsinit_startup
+   0003 32                  355 	reti
+   0004                     356 	.ds	7
+   000B 02s04r00            357 	ljmp	_przerwanie1
+                            358 ;--------------------------------------------------------
+                            359 ; global & static initialisations
+                            360 ;--------------------------------------------------------
+                            361 	.area HOME    (CODE)
+                            362 	.area GSINIT  (CODE)
+                            363 	.area GSFINAL (CODE)
+                            364 	.area GSINIT  (CODE)
+                            365 	.globl __sdcc_gsinit_startup
+                            366 	.globl __sdcc_program_startup
+                            367 	.globl __start__stack
+                            368 	.globl __mcs51_genXINIT
+                            369 	.globl __mcs51_genXRAMCLEAR
+                            370 	.globl __mcs51_genRAMCLEAR
+                            371 ;	main.c:38: unsigned char cyfry[10]={C_0,C_1,C_2,C_3,C_4,C_5,C_6,C_7,C_8,C_9};
+   0000 75*00 5F            372 	mov	_cyfry,#0x5F
+   0003 75*01 44            373 	mov	(_cyfry + 0x0001),#0x44
+   0006 75*02 3E            374 	mov	(_cyfry + 0x0002),#0x3E
+   0009 75*03 76            375 	mov	(_cyfry + 0x0003),#0x76
+   000C 75*04 65            376 	mov	(_cyfry + 0x0004),#0x65
+   000F 75*05 73            377 	mov	(_cyfry + 0x0005),#0x73
+   0012 75*06 7B            378 	mov	(_cyfry + 0x0006),#0x7B
+   0015 75*07 46            379 	mov	(_cyfry + 0x0007),#0x46
+   0018 75*08 7F            380 	mov	(_cyfry + 0x0008),#0x7F
+   001B 75*09 77            381 	mov	(_cyfry + 0x0009),#0x77
+                            382 ;	main.c:39: int i, done = 0;
+   001E E4                  383 	clr	a
+   001F F5*0C               384 	mov	_done,a
+   0021 F5*0D               385 	mov	(_done + 1),a
+                            386 ;	main.c:40: int iter=0;
+   0023 E4                  387 	clr	a
+   0024 F5*0E               388 	mov	_iter,a
+   0026 F5*0F               389 	mov	(_iter + 1),a
+                            390 ;	main.c:41: int count=0;
+   0028 E4                  391 	clr	a
+   0029 F5*10               392 	mov	_count,a
+   002B F5*11               393 	mov	(_count + 1),a
+                            394 ;	main.c:42: int t2=0;
+   002D E4                  395 	clr	a
+   002E F5*12               396 	mov	_t2,a
+   0030 F5*13               397 	mov	(_t2 + 1),a
+                            398 	.area GSFINAL (CODE)
+   0000 02s00r0E            399 	ljmp	__sdcc_program_startup
+                            400 ;--------------------------------------------------------
+                            401 ; Home
+                            402 ;--------------------------------------------------------
+                            403 	.area HOME    (CODE)
+                            404 	.area HOME    (CODE)
+   000E                     405 __sdcc_program_startup:
+   000E 12s05r60            406 	lcall	_main
+                            407 ;	return from main will lock up
+   0011 80 FE               408 	sjmp .
+                            409 ;--------------------------------------------------------
+                            410 ; code
+                            411 ;--------------------------------------------------------
+                            412 	.area CSEG    (CODE)
+                            413 ;------------------------------------------------------------
+                            414 ;Allocation info for local variables in function 'getchar'
+                            415 ;------------------------------------------------------------
+                            416 ;znak                      Allocated to registers 
+                            417 ;------------------------------------------------------------
+                            418 ;	main.c:48: char getchar()
+                            419 ;	-----------------------------------------
+                            420 ;	 function getchar
+                            421 ;	-----------------------------------------
+   0000                     422 _getchar:
+                    0002    423 	ar2 = 0x02
+                    0003    424 	ar3 = 0x03
+                    0004    425 	ar4 = 0x04
+                    0005    426 	ar5 = 0x05
+                    0006    427 	ar6 = 0x06
+                    0007    428 	ar7 = 0x07
+                    0000    429 	ar0 = 0x00
+                    0001    430 	ar1 = 0x01
+                            431 ;	main.c:51: while(RI==0);
+   0000                     432 00101$:
+                            433 ;	main.c:52: RI=0;	
+   0000 10 98 02            434 	jbc	_RI,00108$
+   0003 80 FB               435 	sjmp	00101$
+   0005                     436 00108$:
+                            437 ;	main.c:53: znak = SBUF;
+   0005 85 99 82            438 	mov	dpl,_SBUF
+                            439 ;	main.c:54: return znak;
+   0008 22                  440 	ret
+                            441 ;------------------------------------------------------------
+                            442 ;Allocation info for local variables in function 'wczytaj'
+                            443 ;------------------------------------------------------------
+                            444 ;k                         Allocated to registers r7 r0 
+                            445 ;max                       Allocated to registers r2 r3 
+                            446 ;temp                      Allocated with name '_wczytaj_temp_1_1'
+                            447 ;------------------------------------------------------------
+                            448 ;	main.c:57: char* wczytaj()
+                            449 ;	-----------------------------------------
+                            450 ;	 function wczytaj
+                            451 ;	-----------------------------------------
+   0009                     452 _wczytaj:
+                            453 ;	main.c:60: int max=1024;
+   0009 7A 00               454 	mov	r2,#0x00
+   000B 7B 04               455 	mov	r3,#0x04
+                            456 ;	main.c:61: char *temp=(char*)malloc(sizeof(char)*1024);
+   000D 90 04 00            457 	mov	dptr,#0x0400
+   0010 C0 02               458 	push	ar2
+   0012 C0 03               459 	push	ar3
+   0014 12s00r00            460 	lcall	_malloc
+   0017 AC 82               461 	mov	r4,dpl
+   0019 AD 83               462 	mov	r5,dph
+   001B D0 03               463 	pop	ar3
+   001D D0 02               464 	pop	ar2
+   001F 8C*14               465 	mov	_wczytaj_temp_1_1,r4
+   0021 8D*15               466 	mov	(_wczytaj_temp_1_1 + 1),r5
+   0023 75*16 00            467 	mov	(_wczytaj_temp_1_1 + 2),#0x00
+                            468 ;	main.c:62: while((temp[k]=getchar())!='#')
+   0026 7F 00               469 	mov	r7,#0x00
+   0028 78 00               470 	mov	r0,#0x00
+   002A                     471 00103$:
+   002A EF                  472 	mov	a,r7
+   002B 25*14               473 	add	a,_wczytaj_temp_1_1
+   002D F9                  474 	mov	r1,a
+   002E E8                  475 	mov	a,r0
+   002F 35*15               476 	addc	a,(_wczytaj_temp_1_1 + 1)
+   0031 FC                  477 	mov	r4,a
+   0032 AD*16               478 	mov	r5,(_wczytaj_temp_1_1 + 2)
+   0034 C0 02               479 	push	ar2
+   0036 C0 03               480 	push	ar3
+   0038 C0 04               481 	push	ar4
+   003A C0 05               482 	push	ar5
+   003C C0 07               483 	push	ar7
+   003E C0 00               484 	push	ar0
+   0040 C0 01               485 	push	ar1
+   0042 12s00r00            486 	lcall	_getchar
+   0045 AE 82               487 	mov	r6,dpl
+   0047 D0 01               488 	pop	ar1
+   0049 D0 00               489 	pop	ar0
+   004B D0 07               490 	pop	ar7
+   004D D0 05               491 	pop	ar5
+   004F D0 04               492 	pop	ar4
+   0051 D0 03               493 	pop	ar3
+   0053 D0 02               494 	pop	ar2
+   0055 89 82               495 	mov	dpl,r1
+   0057 8C 83               496 	mov	dph,r4
+   0059 8D F0               497 	mov	b,r5
+   005B EE                  498 	mov	a,r6
+   005C 12s00r00            499 	lcall	__gptrput
+   005F BE 23 02            500 	cjne	r6,#0x23,00112$
+   0062 80 3D               501 	sjmp	00105$
+   0064                     502 00112$:
+                            503 ;	main.c:64: ++k;
+   0064 0F                  504 	inc	r7
+   0065 BF 00 01            505 	cjne	r7,#0x00,00113$
+   0068 08                  506 	inc	r0
+   0069                     507 00113$:
+                            508 ;	main.c:65: if(k>=max)
+   0069 C3                  509 	clr	c
+   006A EF                  510 	mov	a,r7
+   006B 9A                  511 	subb	a,r2
+   006C E8                  512 	mov	a,r0
+   006D 64 80               513 	xrl	a,#0x80
+   006F 8B F0               514 	mov	b,r3
+   0071 63 F0 80            515 	xrl	b,#0x80
+   0074 95 F0               516 	subb	a,b
+   0076 40 B2               517 	jc	00103$
+                            518 ;	main.c:67: max*=2;
+   0078 EB                  519 	mov	a,r3
+   0079 CA                  520 	xch	a,r2
+   007A 25 E0               521 	add	a,acc
+   007C CA                  522 	xch	a,r2
+   007D 33                  523 	rlc	a
+   007E FB                  524 	mov	r3,a
+                            525 ;	main.c:68: realloc(temp,max);
+   007F 8A*00               526 	mov	_realloc_PARM_2,r2
+   0081 8B*01               527 	mov	(_realloc_PARM_2 + 1),r3
+   0083 85*14 82            528 	mov	dpl,_wczytaj_temp_1_1
+   0086 85*15 83            529 	mov	dph,(_wczytaj_temp_1_1 + 1)
+   0089 85*16 F0            530 	mov	b,(_wczytaj_temp_1_1 + 2)
+   008C C0 02               531 	push	ar2
+   008E C0 03               532 	push	ar3
+   0090 C0 07               533 	push	ar7
+   0092 C0 00               534 	push	ar0
+   0094 12s00r00            535 	lcall	_realloc
+   0097 D0 00               536 	pop	ar0
+   0099 D0 07               537 	pop	ar7
+   009B D0 03               538 	pop	ar3
+   009D D0 02               539 	pop	ar2
+   009F 80 89               540 	sjmp	00103$
+   00A1                     541 00105$:
+                            542 ;	main.c:71: temp[k]='\0';
+   00A1 89 82               543 	mov	dpl,r1
+   00A3 8C 83               544 	mov	dph,r4
+   00A5 8D F0               545 	mov	b,r5
+   00A7 E4                  546 	clr	a
+   00A8 12s00r00            547 	lcall	__gptrput
+                            548 ;	main.c:72: return temp;
+   00AB 85*14 82            549 	mov	dpl,_wczytaj_temp_1_1
+   00AE 85*15 83            550 	mov	dph,(_wczytaj_temp_1_1 + 1)
+   00B1 85*16 F0            551 	mov	b,(_wczytaj_temp_1_1 + 2)
+   00B4 22                  552 	ret
+                            553 ;------------------------------------------------------------
+                            554 ;Allocation info for local variables in function 'putchar'
+                            555 ;------------------------------------------------------------
+                            556 ;znak                      Allocated to registers 
+                            557 ;------------------------------------------------------------
+                            558 ;	main.c:75: void putchar(char znak)
+                            559 ;	-----------------------------------------
+                            560 ;	 function putchar
+                            561 ;	-----------------------------------------
+   00B5                     562 _putchar:
+   00B5 85 82 99            563 	mov	_SBUF,dpl
+                            564 ;	main.c:78: while(TI==0);	
+   00B8                     565 00101$:
+                            566 ;	main.c:79: TI = 0;	
+   00B8 10 99 02            567 	jbc	_TI,00108$
+   00BB 80 FB               568 	sjmp	00101$
+   00BD                     569 00108$:
+   00BD 22                  570 	ret
+                            571 ;------------------------------------------------------------
+                            572 ;Allocation info for local variables in function 'printf'
+                            573 ;------------------------------------------------------------
+                            574 ;temp                      Allocated to registers r2 r3 r4 
+                            575 ;------------------------------------------------------------
+                            576 ;	main.c:82: void printf(char *temp)
+                            577 ;	-----------------------------------------
+                            578 ;	 function printf
+                            579 ;	-----------------------------------------
+   00BE                     580 _printf:
+   00BE AA 82               581 	mov	r2,dpl
+   00C0 AB 83               582 	mov	r3,dph
+   00C2 AC F0               583 	mov	r4,b
+                            584 ;	main.c:84: while(temp[i]!=0)
+   00C4 E4                  585 	clr	a
+   00C5 F5*0A               586 	mov	_i,a
+   00C7 F5*0B               587 	mov	(_i + 1),a
+                            588 ;	main.c:85: {
+   00C9                     589 00101$:
+   00C9 E5*0A               590 	mov	a,_i
+   00CB 2A                  591 	add	a,r2
+   00CC FD                  592 	mov	r5,a
+   00CD E5*0B               593 	mov	a,(_i + 1)
+   00CF 3B                  594 	addc	a,r3
+   00D0 FE                  595 	mov	r6,a
+   00D1 8C 07               596 	mov	ar7,r4
+   00D3 8D 82               597 	mov	dpl,r5
+   00D5 8E 83               598 	mov	dph,r6
+   00D7 8F F0               599 	mov	b,r7
+   00D9 12s00r00            600 	lcall	__gptrget
+   00DC FD                  601 	mov	r5,a
+   00DD 60 1B               602 	jz	00103$
+                            603 ;	main.c:87: i++;
+   00DF 8D 82               604 	mov	dpl,r5
+   00E1 C0 02               605 	push	ar2
+   00E3 C0 03               606 	push	ar3
+   00E5 C0 04               607 	push	ar4
+   00E7 12s00rB5            608 	lcall	_putchar
+   00EA D0 04               609 	pop	ar4
+   00EC D0 03               610 	pop	ar3
+   00EE D0 02               611 	pop	ar2
+                            612 ;	main.c:88: }
+   00F0 05*0A               613 	inc	_i
+   00F2 E4                  614 	clr	a
+   00F3 B5*0A D3            615 	cjne	a,_i,00101$
+   00F6 05*0B               616 	inc	(_i + 1)
+   00F8 80 CF               617 	sjmp	00101$
+   00FA                     618 00103$:
+                            619 ;	main.c:90: }
+   00FA 75 82 0A            620 	mov	dpl,#0x0A
+   00FD 02s00rB5            621 	ljmp	_putchar
+                            622 ;------------------------------------------------------------
+                            623 ;Allocation info for local variables in function 'itoa'
+                            624 ;------------------------------------------------------------
+                            625 ;n                         Allocated with name '_itoa_n_1_1'
+                            626 ;temp                      Allocated to registers r4 r5 
+                            627 ;k                         Allocated to registers r4 r5 
+                            628 ;buff                      Allocated with name '_itoa_buff_1_1'
+                            629 ;sloc0                     Allocated with name '_itoa_sloc0_1_0'
+                            630 ;------------------------------------------------------------
+                            631 ;	main.c:93: {
+                            632 ;	-----------------------------------------
+                            633 ;	 function itoa
+                            634 ;	-----------------------------------------
+   0100                     635 _itoa:
+   0100 85 82*17            636 	mov	_itoa_n_1_1,dpl
+   0103 85 83*18            637 	mov	(_itoa_n_1_1 + 1),dph
+                            638 ;	main.c:95: char *buff;
+   0106 AC*17               639 	mov	r4,_itoa_n_1_1
+   0108 AD*18               640 	mov	r5,(_itoa_n_1_1 + 1)
+                            641 ;	main.c:97: {
+   010A E5*17               642 	mov	a,_itoa_n_1_1
+   010C 45*18               643 	orl	a,(_itoa_n_1_1 + 1)
+   010E 70 37               644 	jnz	00115$
+                            645 ;	main.c:99: buff[0]='0';
+   0110 90 00 02            646 	mov	dptr,#0x0002
+   0113 12s00r00            647 	lcall	_malloc
+   0116 AE 82               648 	mov	r6,dpl
+   0118 AF 83               649 	mov	r7,dph
+   011A 8E*19               650 	mov	_itoa_buff_1_1,r6
+   011C 8F*1A               651 	mov	(_itoa_buff_1_1 + 1),r7
+   011E 75*1B 00            652 	mov	(_itoa_buff_1_1 + 2),#0x00
+                            653 ;	main.c:100: buff[1]=0;
+   0121 85*19 82            654 	mov	dpl,_itoa_buff_1_1
+   0124 85*1A 83            655 	mov	dph,(_itoa_buff_1_1 + 1)
+   0127 85*1B F0            656 	mov	b,(_itoa_buff_1_1 + 2)
+   012A 74 30               657 	mov	a,#0x30
+   012C 12s00r00            658 	lcall	__gptrput
+                            659 ;	main.c:101: }
+   012F 74 01               660 	mov	a,#0x01
+   0131 25*19               661 	add	a,_itoa_buff_1_1
+   0133 F9                  662 	mov	r1,a
+   0134 E4                  663 	clr	a
+   0135 35*1A               664 	addc	a,(_itoa_buff_1_1 + 1)
+   0137 FE                  665 	mov	r6,a
+   0138 AF*1B               666 	mov	r7,(_itoa_buff_1_1 + 2)
+   013A 89 82               667 	mov	dpl,r1
+   013C 8E 83               668 	mov	dph,r6
+   013E 8F F0               669 	mov	b,r7
+   0140 E4                  670 	clr	a
+   0141 12s00r00            671 	lcall	__gptrput
+   0144 02s02r1A            672 	ljmp	00106$
+                            673 ;	main.c:105: {
+   0147                     674 00115$:
+   0147 7E 00               675 	mov	r6,#0x00
+   0149 7F 00               676 	mov	r7,#0x00
+   014B                     677 00101$:
+   014B C3                  678 	clr	c
+   014C E4                  679 	clr	a
+   014D 9C                  680 	subb	a,r4
+   014E 74 80               681 	mov	a,#(0x00 ^ 0x80)
+   0150 8D F0               682 	mov	b,r5
+   0152 63 F0 80            683 	xrl	b,#0x80
+   0155 95 F0               684 	subb	a,b
+   0157 50 20               685 	jnc	00118$
+                            686 ;	main.c:107: k++;
+   0159 75*00 0A            687 	mov	__divsint_PARM_2,#0x0A
+   015C E4                  688 	clr	a
+   015D F5*01               689 	mov	(__divsint_PARM_2 + 1),a
+   015F 8C 82               690 	mov	dpl,r4
+   0161 8D 83               691 	mov	dph,r5
+   0163 C0 06               692 	push	ar6
+   0165 C0 07               693 	push	ar7
+   0167 12s00r00            694 	lcall	__divsint
+   016A AC 82               695 	mov	r4,dpl
+   016C AD 83               696 	mov	r5,dph
+   016E D0 07               697 	pop	ar7
+   0170 D0 06               698 	pop	ar6
+                            699 ;	main.c:108: }
+   0172 0E                  700 	inc	r6
+   0173 BE 00 D5            701 	cjne	r6,#0x00,00101$
+   0176 0F                  702 	inc	r7
+   0177 80 D2               703 	sjmp	00101$
+   0179                     704 00118$:
+   0179 8E 04               705 	mov	ar4,r6
+   017B 8F 05               706 	mov	ar5,r7
+                            707 ;	main.c:110: buff[k]=0;
+   017D 8E 82               708 	mov	dpl,r6
+   017F 8F 83               709 	mov	dph,r7
+   0181 A3                  710 	inc	dptr
+   0182 C0 04               711 	push	ar4
+   0184 C0 05               712 	push	ar5
+   0186 C0 06               713 	push	ar6
+   0188 C0 07               714 	push	ar7
+   018A 12s00r00            715 	lcall	_malloc
+   018D A8 82               716 	mov	r0,dpl
+   018F A9 83               717 	mov	r1,dph
+   0191 D0 07               718 	pop	ar7
+   0193 D0 06               719 	pop	ar6
+   0195 D0 05               720 	pop	ar5
+   0197 D0 04               721 	pop	ar4
+   0199 88*19               722 	mov	_itoa_buff_1_1,r0
+   019B 89*1A               723 	mov	(_itoa_buff_1_1 + 1),r1
+   019D 75*1B 00            724 	mov	(_itoa_buff_1_1 + 2),#0x00
+                            725 ;	main.c:111: for(k;k>0;--k)
+   01A0 EE                  726 	mov	a,r6
+   01A1 25*19               727 	add	a,_itoa_buff_1_1
+   01A3 FE                  728 	mov	r6,a
+   01A4 EF                  729 	mov	a,r7
+   01A5 35*1A               730 	addc	a,(_itoa_buff_1_1 + 1)
+   01A7 FF                  731 	mov	r7,a
+   01A8 A8*1B               732 	mov	r0,(_itoa_buff_1_1 + 2)
+   01AA 8E 82               733 	mov	dpl,r6
+   01AC 8F 83               734 	mov	dph,r7
+   01AE 88 F0               735 	mov	b,r0
+   01B0 E4                  736 	clr	a
+   01B1 12s00r00            737 	lcall	__gptrput
+                            738 ;	main.c:112: {
+   01B4                     739 00107$:
+   01B4 C3                  740 	clr	c
+   01B5 E4                  741 	clr	a
+   01B6 9C                  742 	subb	a,r4
+   01B7 74 80               743 	mov	a,#(0x00 ^ 0x80)
+   01B9 8D F0               744 	mov	b,r5
+   01BB 63 F0 80            745 	xrl	b,#0x80
+   01BE 95 F0               746 	subb	a,b
+   01C0 50 58               747 	jnc	00106$
+                            748 ;	main.c:114: n/=10;
+   01C2 EC                  749 	mov	a,r4
+   01C3 24 FF               750 	add	a,#0xff
+   01C5 FE                  751 	mov	r6,a
+   01C6 ED                  752 	mov	a,r5
+   01C7 34 FF               753 	addc	a,#0xff
+   01C9 FF                  754 	mov	r7,a
+   01CA EE                  755 	mov	a,r6
+   01CB 25*19               756 	add	a,_itoa_buff_1_1
+   01CD F5*1C               757 	mov	_itoa_sloc0_1_0,a
+   01CF EF                  758 	mov	a,r7
+   01D0 35*1A               759 	addc	a,(_itoa_buff_1_1 + 1)
+   01D2 F5*1D               760 	mov	(_itoa_sloc0_1_0 + 1),a
+   01D4 85*1B*1E            761 	mov	(_itoa_sloc0_1_0 + 2),(_itoa_buff_1_1 + 2)
+   01D7 75*00 0A            762 	mov	__modsint_PARM_2,#0x0A
+   01DA E4                  763 	clr	a
+   01DB F5*01               764 	mov	(__modsint_PARM_2 + 1),a
+   01DD 85*17 82            765 	mov	dpl,_itoa_n_1_1
+   01E0 85*18 83            766 	mov	dph,(_itoa_n_1_1 + 1)
+   01E3 C0 06               767 	push	ar6
+   01E5 C0 07               768 	push	ar7
+   01E7 12s00r00            769 	lcall	__modsint
+   01EA AB 82               770 	mov	r3,dpl
+   01EC 74 30               771 	mov	a,#0x30
+   01EE 2B                  772 	add	a,r3
+   01EF 85*1C 82            773 	mov	dpl,_itoa_sloc0_1_0
+   01F2 85*1D 83            774 	mov	dph,(_itoa_sloc0_1_0 + 1)
+   01F5 85*1E F0            775 	mov	b,(_itoa_sloc0_1_0 + 2)
+   01F8 12s00r00            776 	lcall	__gptrput
+                            777 ;	main.c:115: }
+   01FB 75*00 0A            778 	mov	__divsint_PARM_2,#0x0A
+   01FE E4                  779 	clr	a
+   01FF F5*01               780 	mov	(__divsint_PARM_2 + 1),a
+   0201 85*17 82            781 	mov	dpl,_itoa_n_1_1
+   0204 85*18 83            782 	mov	dph,(_itoa_n_1_1 + 1)
+   0207 12s00r00            783 	lcall	__divsint
+   020A 85 82*17            784 	mov	_itoa_n_1_1,dpl
+   020D 85 83*18            785 	mov	(_itoa_n_1_1 + 1),dph
+   0210 D0 07               786 	pop	ar7
+   0212 D0 06               787 	pop	ar6
+                            788 ;	main.c:112: {
+   0214 8E 04               789 	mov	ar4,r6
+   0216 8F 05               790 	mov	ar5,r7
+   0218 80 9A               791 	sjmp	00107$
+   021A                     792 00106$:
+                            793 ;	main.c:118: }
+   021A 85*19 82            794 	mov	dpl,_itoa_buff_1_1
+   021D 85*1A 83            795 	mov	dph,(_itoa_buff_1_1 + 1)
+   0220 85*1B F0            796 	mov	b,(_itoa_buff_1_1 + 2)
+   0223 22                  797 	ret
+                            798 ;------------------------------------------------------------
+                            799 ;Allocation info for local variables in function 'init_inout'
+                            800 ;------------------------------------------------------------
+                            801 ;------------------------------------------------------------
+                            802 ;	main.c:121: {
+                            803 ;	-----------------------------------------
+                            804 ;	 function init_inout
+                            805 ;	-----------------------------------------
+   0224                     806 _init_inout:
+                            807 ;	main.c:123: TMOD &= 0x0f;
+   0224 75 98 50            808 	mov	_SCON,#0x50
+                            809 ;	main.c:124: TMOD |= 0x20;
+   0227 53 89 0F            810 	anl	_TMOD,#0x0F
+                            811 ;	main.c:125: TH1=TL1=0xFD;	
+   022A 43 89 20            812 	orl	_TMOD,#0x20
+                            813 ;	main.c:126: PCON=0x80;
+   022D 75 8B FD            814 	mov	_TL1,#0xFD
+   0230 75 8D FD            815 	mov	_TH1,#0xFD
+                            816 ;	main.c:127: TCON=0x40; 
+   0233 75 87 80            817 	mov	_PCON,#0x80
+                            818 ;	main.c:128: RI=0;
+   0236 75 88 40            819 	mov	_TCON,#0x40
+                            820 ;	main.c:129: SBUF=0xf0;
+   0239 C2 98               821 	clr	_RI
+                            822 ;	main.c:130: TI=0;
+   023B 75 99 F0            823 	mov	_SBUF,#0xF0
+                            824 ;	main.c:131: }
+   023E C2 99               825 	clr	_TI
+   0240 22                  826 	ret
+                            827 ;------------------------------------------------------------
+                            828 ;Allocation info for local variables in function 'init_led'
+                            829 ;------------------------------------------------------------
+                            830 ;------------------------------------------------------------
+                            831 ;	main.c:134: {
+                            832 ;	-----------------------------------------
+                            833 ;	 function init_led
+                            834 ;	-----------------------------------------
+   0241                     835 _init_led:
+                            836 ;	main.c:136: TMOD=0x02;
+   0241 75 8A 00            837 	mov	_TL0,#0x00
+   0244 75 8C 00            838 	mov	_TH0,#0x00
+                            839 ;	main.c:137: TCON=0x10;
+   0247 75 89 02            840 	mov	_TMOD,#0x02
+                            841 ;	main.c:138: IE=0x82;
+   024A 75 88 10            842 	mov	_TCON,#0x10
+                            843 ;	main.c:139: putchar(' ');
+   024D 75 A8 82            844 	mov	_IE,#0x82
+                            845 ;	main.c:140: }
+   0250 75 82 20            846 	mov	dpl,#0x20
+   0253 02s00rB5            847 	ljmp	_putchar
+                            848 ;------------------------------------------------------------
+                            849 ;Allocation info for local variables in function 'KR'
+                            850 ;------------------------------------------------------------
+                            851 ;m                         Allocated with name '_KR_PARM_2'
+                            852 ;tekst                     Allocated with name '_KR_PARM_3'
+                            853 ;n                         Allocated with name '_KR_PARM_4'
+                            854 ;wzorzec                   Allocated with name '_KR_wzorzec_1_1'
+                            855 ;d                         Allocated with name '_KR_d_1_1'
+                            856 ;hx                        Allocated with name '_KR_hx_1_1'
+                            857 ;hy                        Allocated with name '_KR_hy_1_1'
+                            858 ;i                         Allocated to registers r7 r0 
+                            859 ;j                         Allocated with name '_KR_j_1_1'
+                            860 ;count                     Allocated with name '_KR_count_1_1'
+                            861 ;------------------------------------------------------------
+                            862 ;	main.c:143: {
+                            863 ;	-----------------------------------------
+                            864 ;	 function KR
+                            865 ;	-----------------------------------------
+   0256                     866 _KR:
+   0256 85 82*26            867 	mov	_KR_wzorzec_1_1,dpl
+   0259 85 83*27            868 	mov	(_KR_wzorzec_1_1 + 1),dph
+   025C 85 F0*28            869 	mov	(_KR_wzorzec_1_1 + 2),b
+                            870 ;	main.c:147: d = (d<<1);
+   025F 75*29 01            871 	mov	_KR_d_1_1,#0x01
+   0262 E4                  872 	clr	a
+   0263 F5*2A               873 	mov	(_KR_d_1_1 + 1),a
+   0265 7F 01               874 	mov	r7,#0x01
+   0267 78 00               875 	mov	r0,#0x00
+   0269                     876 00107$:
+   0269 C3                  877 	clr	c
+   026A EF                  878 	mov	a,r7
+   026B 95*1F               879 	subb	a,_KR_PARM_2
+   026D E8                  880 	mov	a,r0
+   026E 64 80               881 	xrl	a,#0x80
+   0270 85*20 F0            882 	mov	b,(_KR_PARM_2 + 1)
+   0273 63 F0 80            883 	xrl	b,#0x80
+   0276 95 F0               884 	subb	a,b
+   0278 50 12               885 	jnc	00110$
+                            886 ;	main.c:148: 
+   027A E5*2A               887 	mov	a,(_KR_d_1_1 + 1)
+   027C C5*29               888 	xch	a,_KR_d_1_1
+   027E 25 E0               889 	add	a,acc
+   0280 C5*29               890 	xch	a,_KR_d_1_1
+   0282 33                  891 	rlc	a
+   0283 F5*2A               892 	mov	(_KR_d_1_1 + 1),a
+                            893 ;	main.c:147: d = (d<<1);
+   0285 0F                  894 	inc	r7
+   0286 BF 00 E0            895 	cjne	r7,#0x00,00107$
+   0289 08                  896 	inc	r0
+   028A 80 DD               897 	sjmp	00107$
+   028C                     898 00110$:
+                            899 ;	main.c:150: {
+   028C E4                  900 	clr a
+   028D F5*2B               901 	mov _KR_hx_1_1,a
+   028F F5*2C               902 	mov (_KR_hx_1_1 + 1),a
+   0291 F5*2D               903 	mov _KR_hy_1_1,a
+   0293 F5*2E               904 	mov (_KR_hy_1_1 + 1),a
+   0295 F8                  905 	mov r0,a
+   0296 FD                  906 	mov r5,a
+   0297                     907 00111$:
+   0297 C3                  908 	clr	c
+   0298 E8                  909 	mov	a,r0
+   0299 95*1F               910 	subb	a,_KR_PARM_2
+   029B ED                  911 	mov	a,r5
+   029C 64 80               912 	xrl	a,#0x80
+   029E 85*20 F0            913 	mov	b,(_KR_PARM_2 + 1)
+   02A1 63 F0 80            914 	xrl	b,#0x80
+   02A4 95 F0               915 	subb	a,b
+   02A6 50 59               916 	jnc	00114$
+                            917 ;	main.c:152: hy = ((hy<<1) + tekst[i]);
+   02A8 E5*2B               918 	mov	a,_KR_hx_1_1
+   02AA 25*2B               919 	add	a,_KR_hx_1_1
+   02AC FE                  920 	mov	r6,a
+   02AD E5*2C               921 	mov	a,(_KR_hx_1_1 + 1)
+   02AF 33                  922 	rlc	a
+   02B0 FA                  923 	mov	r2,a
+   02B1 E8                  924 	mov	a,r0
+   02B2 25*26               925 	add	a,_KR_wzorzec_1_1
+   02B4 FB                  926 	mov	r3,a
+   02B5 ED                  927 	mov	a,r5
+   02B6 35*27               928 	addc	a,(_KR_wzorzec_1_1 + 1)
+   02B8 FC                  929 	mov	r4,a
+   02B9 AF*28               930 	mov	r7,(_KR_wzorzec_1_1 + 2)
+   02BB 8B 82               931 	mov	dpl,r3
+   02BD 8C 83               932 	mov	dph,r4
+   02BF 8F F0               933 	mov	b,r7
+   02C1 12s00r00            934 	lcall	__gptrget
+   02C4 FB                  935 	mov	r3,a
+   02C5 33                  936 	rlc	a
+   02C6 95 E0               937 	subb	a,acc
+   02C8 FC                  938 	mov	r4,a
+   02C9 EB                  939 	mov	a,r3
+   02CA 2E                  940 	add	a,r6
+   02CB F5*2B               941 	mov	_KR_hx_1_1,a
+   02CD EC                  942 	mov	a,r4
+   02CE 3A                  943 	addc	a,r2
+   02CF F5*2C               944 	mov	(_KR_hx_1_1 + 1),a
+                            945 ;	main.c:153: }
+   02D1 E5*2D               946 	mov	a,_KR_hy_1_1
+   02D3 25*2D               947 	add	a,_KR_hy_1_1
+   02D5 FA                  948 	mov	r2,a
+   02D6 E5*2E               949 	mov	a,(_KR_hy_1_1 + 1)
+   02D8 33                  950 	rlc	a
+   02D9 FB                  951 	mov	r3,a
+   02DA E8                  952 	mov	a,r0
+   02DB 25*21               953 	add	a,_KR_PARM_3
+   02DD FC                  954 	mov	r4,a
+   02DE ED                  955 	mov	a,r5
+   02DF 35*22               956 	addc	a,(_KR_PARM_3 + 1)
+   02E1 FE                  957 	mov	r6,a
+   02E2 AF*23               958 	mov	r7,(_KR_PARM_3 + 2)
+   02E4 8C 82               959 	mov	dpl,r4
+   02E6 8E 83               960 	mov	dph,r6
+   02E8 8F F0               961 	mov	b,r7
+   02EA 12s00r00            962 	lcall	__gptrget
+   02ED FC                  963 	mov	r4,a
+   02EE 33                  964 	rlc	a
+   02EF 95 E0               965 	subb	a,acc
+   02F1 FE                  966 	mov	r6,a
+   02F2 EC                  967 	mov	a,r4
+   02F3 2A                  968 	add	a,r2
+   02F4 F5*2D               969 	mov	_KR_hy_1_1,a
+   02F6 EE                  970 	mov	a,r6
+   02F7 3B                  971 	addc	a,r3
+   02F8 F5*2E               972 	mov	(_KR_hy_1_1 + 1),a
+                            973 ;	main.c:150: {
+   02FA 08                  974 	inc	r0
+   02FB B8 00 99            975 	cjne	r0,#0x00,00111$
+   02FE 0D                  976 	inc	r5
+   02FF 80 96               977 	sjmp	00111$
+   0301                     978 00114$:
+                            979 ;	main.c:158: {
+   0301 AA*1F               980 	mov	r2,_KR_PARM_2
+   0303 AB*20               981 	mov	r3,(_KR_PARM_2 + 1)
+   0305 E5*24               982 	mov	a,_KR_PARM_4
+   0307 C3                  983 	clr	c
+   0308 9A                  984 	subb	a,r2
+   0309 FC                  985 	mov	r4,a
+   030A E5*25               986 	mov	a,(_KR_PARM_4 + 1)
+   030C 9B                  987 	subb	a,r3
+   030D FD                  988 	mov	r5,a
+   030E E4                  989 	clr	a
+   030F F5*31               990 	mov	_KR_count_1_1,a
+   0311 F5*32               991 	mov	(_KR_count_1_1 + 1),a
+   0313 F5*2F               992 	mov	_KR_j_1_1,a
+   0315 F5*30               993 	mov	(_KR_j_1_1 + 1),a
+   0317                     994 00104$:
+   0317 C3                  995 	clr	c
+   0318 EC                  996 	mov	a,r4
+   0319 95*2F               997 	subb	a,_KR_j_1_1
+   031B ED                  998 	mov	a,r5
+   031C 64 80               999 	xrl	a,#0x80
+   031E 85*30 F0           1000 	mov	b,(_KR_j_1_1 + 1)
+   0321 63 F0 80           1001 	xrl	b,#0x80
+   0324 95 F0              1002 	subb	a,b
+   0326 50 03              1003 	jnc	00131$
+   0328 02s03rF9           1004 	ljmp	00106$
+   032B                    1005 00131$:
+                           1006 ;	main.c:160: count++;
+   032B E5*2D              1007 	mov	a,_KR_hy_1_1
+   032D B5*2B 45           1008 	cjne	a,_KR_hx_1_1,00102$
+   0330 E5*2E              1009 	mov	a,(_KR_hy_1_1 + 1)
+   0332 B5*2C 40           1010 	cjne	a,(_KR_hx_1_1 + 1),00102$
+   0335 E5*2F              1011 	mov	a,_KR_j_1_1
+   0337 25*21              1012 	add	a,_KR_PARM_3
+   0339 F5*00              1013 	mov	_memcmp_PARM_2,a
+   033B E5*30              1014 	mov	a,(_KR_j_1_1 + 1)
+   033D 35*22              1015 	addc	a,(_KR_PARM_3 + 1)
+   033F F5*01              1016 	mov	(_memcmp_PARM_2 + 1),a
+   0341 85*23*02           1017 	mov	(_memcmp_PARM_2 + 2),(_KR_PARM_3 + 2)
+   0344 8A*00              1018 	mov	_memcmp_PARM_3,r2
+   0346 8B*01              1019 	mov	(_memcmp_PARM_3 + 1),r3
+   0348 85*26 82           1020 	mov	dpl,_KR_wzorzec_1_1
+   034B 85*27 83           1021 	mov	dph,(_KR_wzorzec_1_1 + 1)
+   034E 85*28 F0           1022 	mov	b,(_KR_wzorzec_1_1 + 2)
+   0351 C0 02              1023 	push	ar2
+   0353 C0 03              1024 	push	ar3
+   0355 C0 04              1025 	push	ar4
+   0357 C0 05              1026 	push	ar5
+   0359 12s00r00           1027 	lcall	_memcmp
+   035C E5 82              1028 	mov	a,dpl
+   035E 85 83 F0           1029 	mov	b,dph
+   0361 D0 05              1030 	pop	ar5
+   0363 D0 04              1031 	pop	ar4
+   0365 D0 03              1032 	pop	ar3
+   0367 D0 02              1033 	pop	ar2
+   0369 45 F0              1034 	orl	a,b
+   036B 70 08              1035 	jnz	00102$
+                           1036 ;	main.c:161: //printf("%d ",j);
+   036D 05*31              1037 	inc	_KR_count_1_1
+   036F E4                 1038 	clr	a
+   0370 B5*31 02           1039 	cjne	a,_KR_count_1_1,00135$
+   0373 05*32              1040 	inc	(_KR_count_1_1 + 1)
+   0375                    1041 00135$:
+   0375                    1042 00102$:
+                           1043 ;	main.c:163: ++j;
+   0375 C0 04              1044 	push	ar4
+   0377 C0 05              1045 	push	ar5
+   0379 E5*2F              1046 	mov	a,_KR_j_1_1
+   037B 25*21              1047 	add	a,_KR_PARM_3
+   037D FE                 1048 	mov	r6,a
+   037E E5*30              1049 	mov	a,(_KR_j_1_1 + 1)
+   0380 35*22              1050 	addc	a,(_KR_PARM_3 + 1)
+   0382 FF                 1051 	mov	r7,a
+   0383 A8*23              1052 	mov	r0,(_KR_PARM_3 + 2)
+   0385 8E 82              1053 	mov	dpl,r6
+   0387 8F 83              1054 	mov	dph,r7
+   0389 88 F0              1055 	mov	b,r0
+   038B 12s00r00           1056 	lcall	__gptrget
+   038E FE                 1057 	mov	r6,a
+   038F 33                 1058 	rlc	a
+   0390 95 E0              1059 	subb	a,acc
+   0392 FF                 1060 	mov	r7,a
+   0393 85*29*00           1061 	mov	__mulint_PARM_2,_KR_d_1_1
+   0396 85*2A*01           1062 	mov	(__mulint_PARM_2 + 1),(_KR_d_1_1 + 1)
+   0399 8E 82              1063 	mov	dpl,r6
+   039B 8F 83              1064 	mov	dph,r7
+   039D C0 02              1065 	push	ar2
+   039F C0 03              1066 	push	ar3
+   03A1 C0 04              1067 	push	ar4
+   03A3 C0 05              1068 	push	ar5
+   03A5 12s00r00           1069 	lcall	__mulint
+   03A8 AE 82              1070 	mov	r6,dpl
+   03AA AF 83              1071 	mov	r7,dph
+   03AC D0 05              1072 	pop	ar5
+   03AE D0 04              1073 	pop	ar4
+   03B0 D0 03              1074 	pop	ar3
+   03B2 D0 02              1075 	pop	ar2
+   03B4 E5*2D              1076 	mov	a,_KR_hy_1_1
+   03B6 C3                 1077 	clr	c
+   03B7 9E                 1078 	subb	a,r6
+   03B8 FE                 1079 	mov	r6,a
+   03B9 E5*2E              1080 	mov	a,(_KR_hy_1_1 + 1)
+   03BB 9F                 1081 	subb	a,r7
+   03BC CE                 1082 	xch	a,r6
+   03BD 25 E0              1083 	add	a,acc
+   03BF CE                 1084 	xch	a,r6
+   03C0 33                 1085 	rlc	a
+   03C1 FF                 1086 	mov	r7,a
+   03C2 EA                 1087 	mov	a,r2
+   03C3 25*2F              1088 	add	a,_KR_j_1_1
+   03C5 F8                 1089 	mov	r0,a
+   03C6 EB                 1090 	mov	a,r3
+   03C7 35*30              1091 	addc	a,(_KR_j_1_1 + 1)
+   03C9 F9                 1092 	mov	r1,a
+   03CA E8                 1093 	mov	a,r0
+   03CB 25*21              1094 	add	a,_KR_PARM_3
+   03CD F8                 1095 	mov	r0,a
+   03CE E9                 1096 	mov	a,r1
+   03CF 35*22              1097 	addc	a,(_KR_PARM_3 + 1)
+   03D1 F9                 1098 	mov	r1,a
+   03D2 AC*23              1099 	mov	r4,(_KR_PARM_3 + 2)
+   03D4 88 82              1100 	mov	dpl,r0
+   03D6 89 83              1101 	mov	dph,r1
+   03D8 8C F0              1102 	mov	b,r4
+   03DA 12s00r00           1103 	lcall	__gptrget
+   03DD F8                 1104 	mov	r0,a
+   03DE 33                 1105 	rlc	a
+   03DF 95 E0              1106 	subb	a,acc
+   03E1 FC                 1107 	mov	r4,a
+   03E2 E8                 1108 	mov	a,r0
+   03E3 2E                 1109 	add	a,r6
+   03E4 F5*2D              1110 	mov	_KR_hy_1_1,a
+   03E6 EC                 1111 	mov	a,r4
+   03E7 3F                 1112 	addc	a,r7
+   03E8 F5*2E              1113 	mov	(_KR_hy_1_1 + 1),a
+                           1114 ;	main.c:164: }
+   03EA 05*2F              1115 	inc	_KR_j_1_1
+   03EC E4                 1116 	clr	a
+   03ED B5*2F 02           1117 	cjne	a,_KR_j_1_1,00136$
+   03F0 05*30              1118 	inc	(_KR_j_1_1 + 1)
+   03F2                    1119 00136$:
+   03F2 D0 05              1120 	pop	ar5
+   03F4 D0 04              1121 	pop	ar4
+   03F6 02s03r17           1122 	ljmp	00104$
+   03F9                    1123 00106$:
+                           1124 ;	main.c:166: }
+   03F9 85*31 82           1125 	mov	dpl,_KR_count_1_1
+   03FC 85*32 83           1126 	mov	dph,(_KR_count_1_1 + 1)
+   03FF 22                 1127 	ret
+                           1128 ;------------------------------------------------------------
+                           1129 ;Allocation info for local variables in function 'przerwanie1'
+                           1130 ;------------------------------------------------------------
+                           1131 ;------------------------------------------------------------
+                           1132 ;	main.c:170: {
+                           1133 ;	-----------------------------------------
+                           1134 ;	 function przerwanie1
+                           1135 ;	-----------------------------------------
+   0400                    1136 _przerwanie1:
+   0400 C0*00              1137 	push	bits
+   0402 C0 E0              1138 	push	acc
+   0404 C0 F0              1139 	push	b
+   0406 C0 82              1140 	push	dpl
+   0408 C0 83              1141 	push	dph
+   040A C0 02              1142 	push	(0+2)
+   040C C0 03              1143 	push	(0+3)
+   040E C0 04              1144 	push	(0+4)
+   0410 C0 05              1145 	push	(0+5)
+   0412 C0 06              1146 	push	(0+6)
+   0414 C0 07              1147 	push	(0+7)
+   0416 C0 00              1148 	push	(0+0)
+   0418 C0 01              1149 	push	(0+1)
+   041A C0 D0              1150 	push	psw
+   041C 75 D0 00           1151 	mov	psw,#0x00
+                           1152 ;	main.c:172: switch(iter)
+   041F 90 FF FF           1153 	mov	dptr,#_U10
+   0422 E4                 1154 	clr	a
+   0423 F0                 1155 	movx	@dptr,a
+                           1156 ;	main.c:173: {
+   0424 E4                 1157 	clr	a
+   0425 B5*0E 06           1158 	cjne	a,_iter,00115$
+   0428 E4                 1159 	clr	a
+   0429 B5*0F 02           1160 	cjne	a,(_iter + 1),00115$
+   042C 80 25              1161 	sjmp	00101$
+   042E                    1162 00115$:
+   042E 74 01              1163 	mov	a,#0x01
+   0430 B5*0E 06           1164 	cjne	a,_iter,00116$
+   0433 E4                 1165 	clr	a
+   0434 B5*0F 02           1166 	cjne	a,(_iter + 1),00116$
+   0437 80 3F              1167 	sjmp	00102$
+   0439                    1168 00116$:
+   0439 74 02              1169 	mov	a,#0x02
+   043B B5*0E 06           1170 	cjne	a,_iter,00117$
+   043E E4                 1171 	clr	a
+   043F B5*0F 02           1172 	cjne	a,(_iter + 1),00117$
+   0442 80 69              1173 	sjmp	00103$
+   0444                    1174 00117$:
+   0444 74 03              1175 	mov	a,#0x03
+   0446 B5*0E 07           1176 	cjne	a,_iter,00118$
+   0449 E4                 1177 	clr	a
+   044A B5*0F 03           1178 	cjne	a,(_iter + 1),00118$
+   044D 02s04rE2           1179 	ljmp	00104$
+   0450                    1180 00118$:
+   0450 02s05r04           1181 	ljmp	00105$
+                           1182 ;	main.c:175: U10=cyfry[(int)count/1000];
+   0453                    1183 00101$:
+   0453 90 80 00           1184 	mov	dptr,#_U15
+   0456 74 DF              1185 	mov	a,#0xDF
+   0458 F0                 1186 	movx	@dptr,a
+                           1187 ;	main.c:176: break;
+   0459 75*00 E8           1188 	mov	__divsint_PARM_2,#0xE8
+   045C 75*01 03           1189 	mov	(__divsint_PARM_2 + 1),#0x03
+   045F 85*10 82           1190 	mov	dpl,_count
+   0462 85*11 83           1191 	mov	dph,(_count + 1)
+   0465 12s00r00           1192 	lcall	__divsint
+   0468 AA 82              1193 	mov	r2,dpl
+   046A AB 83              1194 	mov	r3,dph
+   046C EA                 1195 	mov	a,r2
+   046D 24r00              1196 	add	a,#_cyfry
+   046F F8                 1197 	mov	r0,a
+   0470 90 FF FF           1198 	mov	dptr,#_U10
+   0473 E6                 1199 	mov	a,@r0
+   0474 F0                 1200 	movx	@dptr,a
+                           1201 ;	main.c:177: case 1: U15=W2;
+   0475 02s05r04           1202 	ljmp	00105$
+                           1203 ;	main.c:178: U10=cyfry[(count/100)%10];
+   0478                    1204 00102$:
+   0478 90 80 00           1205 	mov	dptr,#_U15
+   047B 74 EF              1206 	mov	a,#0xEF
+   047D F0                 1207 	movx	@dptr,a
+                           1208 ;	main.c:179: break;
+   047E 75*00 64           1209 	mov	__divsint_PARM_2,#0x64
+   0481 E4                 1210 	clr	a
+   0482 F5*01              1211 	mov	(__divsint_PARM_2 + 1),a
+   0484 85*10 82           1212 	mov	dpl,_count
+   0487 85*11 83           1213 	mov	dph,(_count + 1)
+   048A 12s00r00           1214 	lcall	__divsint
+   048D AA 82              1215 	mov	r2,dpl
+   048F AB 83              1216 	mov	r3,dph
+   0491 75*00 0A           1217 	mov	__modsint_PARM_2,#0x0A
+   0494 E4                 1218 	clr	a
+   0495 F5*01              1219 	mov	(__modsint_PARM_2 + 1),a
+   0497 8A 82              1220 	mov	dpl,r2
+   0499 8B 83              1221 	mov	dph,r3
+   049B 12s00r00           1222 	lcall	__modsint
+   049E AA 82              1223 	mov	r2,dpl
+   04A0 AB 83              1224 	mov	r3,dph
+   04A2 EA                 1225 	mov	a,r2
+   04A3 24r00              1226 	add	a,#_cyfry
+   04A5 F8                 1227 	mov	r0,a
+   04A6 90 FF FF           1228 	mov	dptr,#_U10
+   04A9 E6                 1229 	mov	a,@r0
+   04AA F0                 1230 	movx	@dptr,a
+                           1231 ;	main.c:180: case 2: U15=W3;
+                           1232 ;	main.c:181: U10=cyfry[(count/10)%10];
+   04AB 80 57              1233 	sjmp	00105$
+   04AD                    1234 00103$:
+   04AD 90 80 00           1235 	mov	dptr,#_U15
+   04B0 74 7F              1236 	mov	a,#0x7F
+   04B2 F0                 1237 	movx	@dptr,a
+                           1238 ;	main.c:182: break;
+   04B3 75*00 0A           1239 	mov	__divsint_PARM_2,#0x0A
+   04B6 E4                 1240 	clr	a
+   04B7 F5*01              1241 	mov	(__divsint_PARM_2 + 1),a
+   04B9 85*10 82           1242 	mov	dpl,_count
+   04BC 85*11 83           1243 	mov	dph,(_count + 1)
+   04BF 12s00r00           1244 	lcall	__divsint
+   04C2 AA 82              1245 	mov	r2,dpl
+   04C4 AB 83              1246 	mov	r3,dph
+   04C6 75*00 0A           1247 	mov	__modsint_PARM_2,#0x0A
+   04C9 E4                 1248 	clr	a
+   04CA F5*01              1249 	mov	(__modsint_PARM_2 + 1),a
+   04CC 8A 82              1250 	mov	dpl,r2
+   04CE 8B 83              1251 	mov	dph,r3
+   04D0 12s00r00           1252 	lcall	__modsint
+   04D3 AA 82              1253 	mov	r2,dpl
+   04D5 AB 83              1254 	mov	r3,dph
+   04D7 EA                 1255 	mov	a,r2
+   04D8 24r00              1256 	add	a,#_cyfry
+   04DA F8                 1257 	mov	r0,a
+   04DB 90 FF FF           1258 	mov	dptr,#_U10
+   04DE E6                 1259 	mov	a,@r0
+   04DF F0                 1260 	movx	@dptr,a
+                           1261 ;	main.c:183: case 3: U15=W4;
+                           1262 ;	main.c:184: U10=cyfry[count%10];
+   04E0 80 22              1263 	sjmp	00105$
+   04E2                    1264 00104$:
+   04E2 90 80 00           1265 	mov	dptr,#_U15
+   04E5 74 BF              1266 	mov	a,#0xBF
+   04E7 F0                 1267 	movx	@dptr,a
+                           1268 ;	main.c:185: break;		
+   04E8 75*00 0A           1269 	mov	__modsint_PARM_2,#0x0A
+   04EB E4                 1270 	clr	a
+   04EC F5*01              1271 	mov	(__modsint_PARM_2 + 1),a
+   04EE 85*10 82           1272 	mov	dpl,_count
+   04F1 85*11 83           1273 	mov	dph,(_count + 1)
+   04F4 12s00r00           1274 	lcall	__modsint
+   04F7 AA 82              1275 	mov	r2,dpl
+   04F9 AB 83              1276 	mov	r3,dph
+   04FB EA                 1277 	mov	a,r2
+   04FC 24r00              1278 	add	a,#_cyfry
+   04FE F8                 1279 	mov	r0,a
+   04FF 90 FF FF           1280 	mov	dptr,#_U10
+   0502 E6                 1281 	mov	a,@r0
+   0503 F0                 1282 	movx	@dptr,a
+                           1283 ;	main.c:187: iter++;
+   0504                    1284 00105$:
+                           1285 ;	main.c:188: if(iter>3)
+   0504 05*0E              1286 	inc	_iter
+   0506 E4                 1287 	clr	a
+   0507 B5*0E 02           1288 	cjne	a,_iter,00119$
+   050A 05*0F              1289 	inc	(_iter + 1)
+   050C                    1290 00119$:
+                           1291 ;	main.c:189: {
+   050C C3                 1292 	clr	c
+   050D 74 03              1293 	mov	a,#0x03
+   050F 95*0E              1294 	subb	a,_iter
+   0511 74 80              1295 	mov	a,#(0x00 ^ 0x80)
+   0513 85*0F F0           1296 	mov	b,(_iter + 1)
+   0516 63 F0 80           1297 	xrl	b,#0x80
+   0519 95 F0              1298 	subb	a,b
+   051B 50 05              1299 	jnc	00108$
+                           1300 ;	main.c:191: }
+   051D E4                 1301 	clr	a
+   051E F5*0E              1302 	mov	_iter,a
+   0520 F5*0F              1303 	mov	(_iter + 1),a
+   0522                    1304 00108$:
+   0522 D0 D0              1305 	pop	psw
+   0524 D0 01              1306 	pop	(0+1)
+   0526 D0 00              1307 	pop	(0+0)
+   0528 D0 07              1308 	pop	(0+7)
+   052A D0 06              1309 	pop	(0+6)
+   052C D0 05              1310 	pop	(0+5)
+   052E D0 04              1311 	pop	(0+4)
+   0530 D0 03              1312 	pop	(0+3)
+   0532 D0 02              1313 	pop	(0+2)
+   0534 D0 83              1314 	pop	dph
+   0536 D0 82              1315 	pop	dpl
+   0538 D0 F0              1316 	pop	b
+   053A D0 E0              1317 	pop	acc
+   053C D0*00              1318 	pop	bits
+   053E 32                 1319 	reti
+                           1320 ;------------------------------------------------------------
+                           1321 ;Allocation info for local variables in function 'czekaj'
+                           1322 ;------------------------------------------------------------
+                           1323 ;t                         Allocated to registers r2 r3 
+                           1324 ;w                         Allocated to registers r4 r5 
+                           1325 ;------------------------------------------------------------
+                           1326 ;	main.c:195: {
+                           1327 ;	-----------------------------------------
+                           1328 ;	 function czekaj
+                           1329 ;	-----------------------------------------
+   053F                    1330 _czekaj:
+   053F AA 82              1331 	mov	r2,dpl
+   0541 AB 83              1332 	mov	r3,dph
+                           1333 ;	main.c:198: {
+   0543 7C 00              1334 	mov	r4,#0x00
+   0545 7D 00              1335 	mov	r5,#0x00
+   0547                    1336 00101$:
+   0547 C3                 1337 	clr	c
+   0548 EC                 1338 	mov	a,r4
+   0549 9A                 1339 	subb	a,r2
+   054A ED                 1340 	mov	a,r5
+   054B 64 80              1341 	xrl	a,#0x80
+   054D 8B F0              1342 	mov	b,r3
+   054F 63 F0 80           1343 	xrl	b,#0x80
+   0552 95 F0              1344 	subb	a,b
+   0554 40 01              1345 	jc	00110$
+   0556 22                 1346 	ret
+   0557                    1347 00110$:
+                           1348 ;	main.c:202: }
+                           1349 	
+   0557 00                 1350 	  nop
+                           1351 	 
+                           1352 ;	main.c:198: {
+   0558 0C                 1353 	inc	r4
+   0559 BC 00 EB           1354 	cjne	r4,#0x00,00101$
+   055C 0D                 1355 	inc	r5
+   055D 02s05r47           1356 	ljmp	00101$
+                           1357 ;------------------------------------------------------------
+                           1358 ;Allocation info for local variables in function 'main'
+                           1359 ;------------------------------------------------------------
+                           1360 ;x                         Allocated with name '_main_x_1_1'
+                           1361 ;y                         Allocated with name '_main_y_1_1'
+                           1362 ;------------------------------------------------------------
+                           1363 ;	main.c:206: {
+                           1364 ;	-----------------------------------------
+                           1365 ;	 function main
+                           1366 ;	-----------------------------------------
+   0560                    1367 _main:
+                           1368 ;	main.c:211: {
+   0560                    1369 00102$:
+                           1370 ;	main.c:213: printf(itoa(count));
+   0560 12s02r24           1371 	lcall	_init_inout
+                           1372 ;	main.c:214: /*count = 1;
+   0563 85*10 82           1373 	mov	dpl,_count
+   0566 85*11 83           1374 	mov	dph,(_count + 1)
+   0569 12s01r00           1375 	lcall	_itoa
+   056C 12s00rBE           1376 	lcall	_printf
+                           1377 ;	main.c:236: }
+   056F 80 EF              1378 	sjmp	00102$
+                           1379 	.area CSEG    (CODE)
+                           1380 	.area CONST   (CODE)
+   0000                    1381 __str_0:
+   0000 6B 6F 6E 69 65 63  1382 	.ascii "koniec"
+   0006 00                 1383 	.db 0x00
+                           1384 	.area XINIT   (CODE)
+                           1385 	.area CABS    (ABS,CODE)
